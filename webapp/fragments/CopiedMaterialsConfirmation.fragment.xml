@@ -1,0 +1,59 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table">
+	<Dialog title="{i18n>CopiedMaterialsConfirmation}" contentWidth="70%" contentHeight="70%">
+		<content>
+			<table:Table selectionMode="Multi" rows="{CopiedMatsConfrmDisplay>/}" alternateRowColors="true" visibleRowCount="10">
+		<table:extension>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button text="{i18n>Delete}" press="onCopiedMaterialsDelete" type="Transparent" enabled="true"/>
+			</OverflowToolbar>
+		</table:extension>
+				<table:rowSettingsTemplate>
+					<table:RowSettings highlight="{CopiedMatsConfrmDisplay>Status}"/>
+				</table:rowSettingsTemplate>
+				<table:columns>
+					<table:Column autoResizable="true" width="250px" hAlign="Left" tooltip="{i18n>Message}">
+						<Label text="{i18n>Message}"/>
+						<table:template>
+							<Text text="{CopiedMatsConfrmDisplay>Message}"/>
+						</table:template>
+					</table:Column>
+					<table:Column autoResizable="true" width="200px" hAlign="Right" tooltip="{i18n>Material}">
+						<Label text="{i18n>Material}"/>
+						<table:template>
+							<Text text="{CopiedMatsConfrmDisplay>Material}"/>
+						</table:template>
+					</table:Column>
+					<table:Column autoResizable="true" width="200px" hAlign="Right" tooltip="{i18n>MaterialDes}">
+						<Label text="{i18n>MaterialDes}"/>
+						<table:template>
+							<Text text="{CopiedMatsConfrmDisplay>MaterialDescription}"/>
+						</table:template>
+					</table:Column>
+					<table:Column autoResizable="true" width="150px" tooltip="{i18n>MaterialSubstitution}" sortProperty="MaterialSubstitution"
+						filterProperty="MaterialSubstitution">
+						<Label text="{i18n>MaterialSubstitution}"/>
+						<table:template>
+							<Text text="{CopiedMatsConfrmDisplay>MaterialSubstitution}"/>
+						</table:template>
+					</table:Column>
+					<table:Column autoResizable="true" width="250px" tooltip="{i18n>MaterialSalesStatus}" filterProperty="MaterialSalesStatus">
+						<Label text="{i18n>MaterialSalesStatus}"/>
+						<table:template>
+							<Text
+								text="{parts: [{path:'CopiedMatsConfrmDisplay>MaterialSalesStatusDesc'},{path: 'CopiedMatsConfrmDisplay>MaterialSalesStatus'}], formatter: '.oFormatter.materialSalesStatusFormat'}"
+								wrapping="false"/>
+						</table:template>
+					</table:Column>
+				</table:columns>
+			</table:Table>
+		</content>
+		<beginButton>
+			<Button text="{i18n>Ok}" press="onCopiedMatsConfrmDialogOK"/>
+			<!--onCopiedMatsConfrmDialogCancel-->
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Close}" press="onDisplayDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

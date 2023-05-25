@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog title="{i18n>SelSO}" class="sapUiPopupWithPadding" items="{/SalesOrgHelpSet}" search="_handleSalesOrgValueHelpSearch"
+		confirm="_handleSalesOrgValueHelpConfirm" cancel="_handleValueHelpDialogClose" liveChange="_handleSalesOrgValueHelpSearch">
+		<StandardListItem title="{Vkorg}" description="{Vtext}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

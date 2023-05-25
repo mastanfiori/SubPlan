@@ -1,0 +1,15 @@
+/* Enter your custom styles here */
+
+.adjustHeight{
+	height: 32px !important;
+} 
+
+.DisplayStatus{
+	font-weight: bold !important;
+    /*color: brown !important;*/
+}
+
+.CreateStatus{
+	font-weight: bold !important;
+    color: blue !important;
+}

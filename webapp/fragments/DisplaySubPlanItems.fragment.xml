@@ -1,0 +1,279 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table">
+	<table:Table id="idTab" editable="false" enableColumnFreeze="true" selectionMode="Single" rows="{SubPlanItemDisplay>/}"
+		alternateRowColors="true" visibleRowCount="10" visibleRowCountMode="Interactive">
+		<table:extension>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<!--<Button text="{i18n>applyAll}" press="onApplyAll" type="Transparent" enabled="true"/>-->
+				<!--<Button text="Delete" press="onDelete" type="Transparent" enabled="{filterBarModel>/buttonFlag}"/>-->
+			</OverflowToolbar>
+		</table:extension>
+		<table:rowSettingsTemplate>
+			<table:RowSettings highlight="{SubPlanItemDisplay>Status}"/>
+		</table:rowSettingsTemplate>
+		<table:columns>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>Delete}">
+				<Label text="{i18n>Delete}"/>
+				<table:template>
+					<CheckBox selected="{SubPlanItemDisplay>DeletionFlag}" editable="false"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>TBDFlag}">
+				<Label text="{i18n>TBDFlag}"/>
+				<table:template>
+					<CheckBox selected="{SubPlanItemDisplay>TBDFlag}" editable="false"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>ProductionGroup}" visible="false">
+				<Label text="{i18n>ProductionGroup}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>ProdID}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>SequenceNumber}" sortProperty="ProdSeqNum" filterProperty="ProdSeqNum">
+				<Label text="{i18n>SequenceNumber}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>ProdSeqNum}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="150px" tooltip="{i18n>Material}" sortProperty="Material" filterProperty="Material">
+				<Label text="{i18n>Material}"/>
+				<table:template>
+					<!--<Text text="{SubPlanItemDisplay>Material}"/>-->
+					<Link press="onMaterialLinkPress" text="{SubPlanItemDisplay>Material}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="250px" tooltip="{i18n>MaterialDes}">
+				<Label text="{i18n>MaterialDes}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>MaterialDescription}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="150px" tooltip="{i18n>MaterialSubstitution}" sortProperty="MaterialSubstitution"
+				filterProperty="MaterialSubstitution">
+				<Label text="{i18n>MaterialSubstitution}"/>
+				<table:template>
+					<Link press="onMaterialLinkPress" text="{SubPlanItemDisplay>MaterialSubstitution}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="150px" tooltip="{i18n>CatalogMaterial}" sortProperty="CatalogMaterial"
+				filterProperty="CatalogMaterial">
+				<Label text="{i18n>CatalogMaterial}"/>
+				<table:template>
+					<Link press="onMaterialLinkPress" text="{SubPlanItemDisplay>CatalogMaterial}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="250px" tooltip="{i18n>MaterialSalesStatus}" filterProperty="MaterialSalesStatus">
+				<Label text="{i18n>MaterialSalesStatus}"/>
+				<table:template>
+					<Text
+						text="{parts: [{path:'SubPlanItemDisplay>MaterialSalesStatusDesc'},{path: 'SubPlanItemDisplay>MaterialSalesStatus'}], formatter: '.oFormatter.materialSalesStatusFormat'}"
+						wrapping="false"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>TrackingCode}" sortProperty="TrackingCode" filterProperty="TrackingCode">
+				<Label text="{i18n>TrackingCode}"/>
+				<table:template>
+					<HBox>
+						<Button icon="sap-icon://clinical-tast-tracker" press="onDisplayTrackCodesDialog"
+							visible="{= ${SubPlanItemDisplay>ProdSeqNum} === '1' ? true : false}"></Button>
+						<Link press="onTrackingCodeLinkPress" text="{SubPlanItemDisplay>TrackingCode}" target="{SubPlanItemDisplay>Material}"
+							visible="{= ${SubPlanItemDisplay>ProdSeqNum} === '1' ? false : true}"/>
+						<!--<Text text="{SubPlanItemDisplay>TrackingCode}"/>-->
+					</HBox>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>PanelArea}">
+				<Label text="{i18n>PanelArea}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>PanelArea}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>PanelCode}">
+				<Label text="{i18n>PanelCode}"/>
+				<table:template>
+					<!--<Text text="{SubPlanItemDisplay>PanelCode}"/>-->
+					<Link press="onPanelCodePress" text="{SubPlanItemDisplay>PanelCode}" target="{SubPlanItemDisplay>Material}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>ProductPrice}">
+				<Label text="{i18n>ProductPrice}"/>
+				<table:template>
+					<Text text="{path: 'SubPlanItemDisplay>ProdSellPrice', formatter: '.oFormatter.formatFloat'}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>PHPrice}">
+				<Label text="{i18n>PHPrice}"/>
+				<table:template>
+					<Text text="{path:'SubPlanItemDisplay>PostageHandling', formatter: '.oFormatter.formatFloat'}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>MultiPHPrice}">
+				<Label text="{i18n>MultiPHPrice}"/>
+				<table:template>
+					<Text text="{path:'SubPlanItemDisplay>PostageHandling2', formatter: '.oFormatter.formatFloat'}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>AmountPaidTrigger}">
+				<Label text="{i18n>AmountPaidTrigger}"/>
+				<table:template>
+					<Text text="{path:'SubPlanItemDisplay>ProdAmtPaidTrigger', formatter: '.oFormatter.formatFloat'}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>FreeProduct}">
+				<Label text="{i18n>FreeProduct}"/>
+				<table:template>
+					<CheckBox selected="{= ${SubPlanItemDisplay>FreeProduct} === 'X' ? true : false}" valueState="{SubPlanItemDisplay>FreeProductState}"
+						enabled="false" select="onFreeProductSelect"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>Numberinstalls}">
+				<Label text="{i18n>Numberinstalls}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>NumberOfInstalls}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>NubrPmtsBefore}">
+				<Label text="{i18n>NubrPmtsBefore}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>NubrPmtsBefore}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>Firstinstallamt}">
+				<Label text="{i18n>Firstinstallamt}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>FirstInstallAmt}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>UnequalFirstInstallment}">
+				<Label text="{i18n>UnequalFirstInstallment}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>UnequalFirstInstallment}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>InvAllocationCode}">
+				<Label text="{i18n>InvAllocationCode}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>InvAllocationCode}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="150px" hAlign="Right" tooltip="{i18n>TmpltLineNbr}">
+				<Label text="{i18n>TmpltLineNbr}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>TmpltLineNbr}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>OfferSeqNbr}">
+				<Label text="{i18n>OfferSeqNbr}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>OfferSeqNbr}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>PromiseDays}">
+				<Label text="{i18n>PromiseDays}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>PromiseDays}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>NumberOfDays}" visible="false">
+				<Label text="{i18n>NumberOfDays}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>NumberOfDays}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>PurchaseLimit}">
+				<Label text="{i18n>PurchaseLimit}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>PurchaseLimit}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>SegmentCode}">
+				<Label text="{i18n>SegmentCode}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>SegmentCode}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>Desc}">
+				<Label text="{i18n>Desc}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>SegmentDescrip}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>SubSegmentCode}">
+				<Label text="{i18n>SubSegmentCode}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>SubSegmentCode}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>Desc}">
+				<Label text="{i18n>Desc}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>SubSegmentDescrip}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="150px" hAlign="Right" tooltip="{i18n>StaticPromiseDate}">
+				<Label text="{i18n>StaticPromiseDate}"/>
+				<table:template>
+					<Text
+						text="{path:'SubPlanItemDisplay>StaticPromiseDate', type:'sap.ui.model.type.Date', formatOptions: { strictParsing: true , UTC: true }}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="150px" tooltip="{i18n>ShipIntervalCC}">
+				<Label text="{i18n>ShipIntervalCC}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>ShipIntervalDaysCC}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>ShipIntervalNonCC}">
+				<Label text="{i18n>ShipIntervalNonCC}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>ShipIntervalDayNonCC}"/>
+				</table:template>
+			</table:Column>
+			<!--Category Info: Added on 3rd Jan 2022 by VKOTHURU-->
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>Category1}">
+				<Label text="{i18n>Category1}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>Category1}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>Category2}">
+				<Label text="{i18n>Category2}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>Category2}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>Category3}">
+				<Label text="{i18n>Category3}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>Category3}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>Category4}">
+				<Label text="{i18n>Category4}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>Category4}"/>
+				</table:template>
+			</table:Column>
+			<table:Column autoResizable="true" width="100px" tooltip="{i18n>Category5}">
+				<Label text="{i18n>Category5}"/>
+				<table:template>
+					<Text text="{SubPlanItemDisplay>Category5}"/>
+				</table:template>
+			</table:Column>
+			<!--Category Info: Added on 3rd Jan 2022 by VKOTHURU-->
+			<!--<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>ConsecutiveReturnCount}">-->
+			<!--	<Label text="{i18n>ConsecutiveReturnCount}"/>-->
+			<!--	<table:template>-->
+			<!--		<Text text="{SubPlanItemDisplay>ConsecutiveReturnCount}"/>-->
+			<!--	</table:template>-->
+			<!--</table:Column>-->
+			<!--<table:Column autoResizable="true" width="100px" hAlign="Right" tooltip="{i18n>BefShip}">-->
+			<!--	<Label text="{i18n>BefShip}"/>-->
+			<!--	<table:template>-->
+			<!--		<Text text="{SubPlanItemDisplay>BefShip}"/>-->
+			<!--	</table:template>-->
+			<!--</table:Column>-->
+		</table:columns>
+	</table:Table>
+</core:FragmentDefinition>

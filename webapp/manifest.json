@@ -1,0 +1,190 @@
+{
+    "_version": "1.12.0",
+    "sap.app": {
+        "id": "com.itell.bradford.ZSD_SUBPLAN_MAINT",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "sourceTemplate": {
+            "id": "servicecatalog.connectivityComponentForManifest",
+            "version": "0.0.0",
+            "toolsId": "c24c2055-e50b-41f8-8df6-7f317fd7dcc4"
+        },
+        "dataSources": {
+            "ZSD_SUBPLAN_MAINTENANCE_SRV": {
+                "uri": "/sap/opu/odata/sap/ZSD_SUBPLAN_MAINTENANCE_SRV/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "FIN_USER_DEFAULTPARAMETER_SRV": {
+                "uri": "/sap/opu/odata/sap/FIN_USER_DEFAULTPARAMETER_SRV/",
+                "type": "OData",
+                "settings": {
+                    "localUri": "localService/FIN_USER_DEFAULTPARAMETER_SRV/metadata.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "rootView": {
+            "viewName": "com.itell.bradford.ZSD_SUBPLAN_MAINT.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.65.6",
+            "libs": {
+                "sap.ui.layout": {},
+                "sap.ui.core": {},
+                "sap.m": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "config": {
+            "sapFiori2Adaptation": true,
+            "fullWidth": "true"
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "com.itell.bradford.ZSD_SUBPLAN_MAINT.i18n.i18n"
+                }
+            },
+            "": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneWay",
+                    "defaultCountMode": "None"
+                },
+                "dataSource": "ZSD_SUBPLAN_MAINTENANCE_SRV",
+                "preload": true
+            },
+            "defaultValuesModel": {
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "OneWay",
+                    "defaultCountMode": "Request"
+                },
+                "dataSource": "FIN_USER_DEFAULTPARAMETER_SRV",
+                "preload": true
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "com.itell.bradford.ZSD_SUBPLAN_MAINT.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false,
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                }
+            },
+            "routes": [
+                {
+                    "name": "Main",
+                    "pattern": "",
+                    "target": [
+                        "SubPlanReport"
+                    ]
+                },
+                {
+                    "name": "DisplaySubPlan",
+                    "pattern": "DisplaySubPlan/{salesorganization}/{subplanid}/{status}:planversionnum:",
+                    "target": [
+                        "DisplaySubPlan"
+                    ]
+                },
+                {
+                    "name": "CreateSubPlan",
+                    "pattern": "CreateSubPlan/{action}:salesorganization::subplanid::status::planversionnum::copiedsalesorg:",
+                    "target": [
+                        "CreateSubPlan"
+                    ]
+                },
+                {
+                    "name": "ChangeLog",
+                    "pattern": "ChangeLog/{subplanid}/{salesorganization}/{status}:planversionnum:",
+                    "target": [
+                        "ChangeLog"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetApp": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "App",
+                    "viewName": "App"
+                },
+                "SubPlanReport": {
+                    "viewType": "XML",
+                    "viewName": "SubPlanReport"
+                },
+                "CreateSubPlan": {
+                    "viewType": "XML",
+                    "viewName": "CreateSubPlan"
+                },
+                "DisplaySubPlan": {
+                    "viewType": "XML",
+                    "viewName": "DisplaySubPlan"
+                },
+                "ChangeLog": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "viewName": "ChangeLog"
+                }
+            }
+        }
+    },
+    "sap.platform.abap": {
+        "uri": "/sap/bc/ui5_ui5/sap/zsd_subplan/webapp",
+        "_version": "1.1.0"
+    },
+    "sap.platform.hcp": {
+        "uri": "webapp",
+        "_version": "1.1.0"
+    }
+}

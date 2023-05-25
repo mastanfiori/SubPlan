@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:richTextEditor="sap.ui.richtexteditor">
+	<Dialog title="{i18n>ManualTrackingCodesHeader}" contentWidth="40%" contentHeight="60%">
+		<content>
+			<TextArea id="ManualTrackCodeInp" name="{i18n>ManualTrackCode}" value="{manualTrackCodesData>/}" rows="20" cols="50"
+				class="sapUiSmallMargin"></TextArea>
+				<!--change="onManualTrackCodeChange"-->
+		</content>
+		<beginButton>
+			<Button text="{i18n>Ok}" press="onManualTrackCodeChange"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Cancel}" press="onDisplayDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

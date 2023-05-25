@@ -1,0 +1,31 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="{i18n>CustSrvTrackCodeDisplay}" contentWidth="40%">
+		<content>
+			<Table sticky="ColumnHeaders" alternateRowColors="true" items="{CustSrvTrackCodesData>/}" mode="None">
+				<columns>
+					<Column>
+						<Label text="{i18n>planversionnum}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>SubplanName}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>CustSrvTrackingCode}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text visible="true" text="{CustSrvTrackCodesData>PlanVersionNum}"/>
+							<Text visible="true" text="{CustSrvTrackCodesData>SubplanName}"/>
+							<Text visible="true" text="{CustSrvTrackCodesData>ClntSrvcsTrackingCode}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<endButton>
+			<Button text="{i18n>Close}" press="onDisplayDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,40 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="{i18n>AvailbleVersions}" contentWidth="40%">
+		<content>
+			<Table sticky="ColumnHeaders" alternateRowColors="true" items="{
+			path: 'AvailbleVersionsData>/',
+			sorter: {
+				path: 'PlanVersionNum'
+			}
+		}" mode="None">
+				<columns>
+					<Column>
+						<Label text="{i18n>salesorganization}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>SubPlanID}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>SubplanName}"/>
+					</Column>
+					<Column>
+						<Label text="{i18n>planversionnum}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text visible="true" text="{AvailbleVersionsData>SalesOganization}"/>
+							<Text visible="true" text="{AvailbleVersionsData>SubPlanID}"/>
+							<Text visible="true" text="{AvailbleVersionsData>SubplanName}"/>
+							<Text visible="true" text="{AvailbleVersionsData>PlanVersionNum}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<endButton>
+			<Button text="{i18n>Close}" press="onDisplayDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

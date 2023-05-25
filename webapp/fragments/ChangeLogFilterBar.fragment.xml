@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<smartFilterBar:SmartFilterBar id="CLsmartFilterBar" useToolbar="false" entitySet="ChangeDocumentsSet"
+		persistencyKey="com.itell.bradford.ZSD_SUBPLAN_MAINT.view.CLFilterBar" search="onSearch" assignedFiltersChanged="onAssignedFiltersChanged"
+		showFilterConfiguration="true" beforeVariantFetch="onVariantSave" afterVariantLoad="afterVariantSave" initialized="onFBInitialized">
+		<smartFilterBar:controlConfiguration>
+			<smartFilterBar:ControlConfiguration key="SubPlanID" index="1" label="{i18n>SubPlanID}" groupId="_BASIC" width="300px"
+				mandatory="notMandatory" visibleInAdvancedArea="true">
+				<smartFilterBar:customControl>
+					<Input id="clSubPlanID" value="" editable="false"/>
+				</smartFilterBar:customControl>
+			</smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration key="UserName" index="1" label="{i18n>ChangeBy}" groupId="_BASIC" width="300px"
+				mandatory="notMandatory" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
+			<smartFilterBar:ControlConfiguration key="UDate" index="1" label="{i18n>ChangeDate}"
+				conditionType="{ module: 'sap.ui.comp.config.condition.DateRangeType', operations: { filter: { path: 'key' , contains: 'TOMORROW,NEXT,LASTYEAR,LAST2WEEKS,LAST3WEEKS,LAST4WEEKS,LAST5WEEKS,YEARTODATE,QUARTER1,QUARTER2,QUARTER3,QUARTER4' , exclude:true } } }"
+				groupId="_BASIC" width="300px" mandatory="notMandatory" visibleInAdvancedArea="true"></smartFilterBar:ControlConfiguration>
+		</smartFilterBar:controlConfiguration>
+	</smartFilterBar:SmartFilterBar>
+</core:FragmentDefinition>

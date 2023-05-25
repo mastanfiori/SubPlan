@@ -1,0 +1,81 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core"
+	xmlns:table="sap.ui.table" xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<ValueHelpDialog title="{i18n>Material}" ok="_handleMaterialValueHelpConfirm" cancel="_handleMaterialValueHelpDialogClose"
+		afterClose="_onValueHelpAfterClose" supportRanges="false" keys="Material,MaterialSubstitution,TBDFlag" key="Material"
+		descriptionKey="MaterialDescription" supportMultiselect="false">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch">
+				<fb:filterGroupItems name="MaterialFB">
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Material" label="{i18n>Material}" visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Material"/>
+							<!--showSuggestion="true" showValueHelp="false"-->
+							<!--	suggestionItems="{ path: '/MaterialF4HelpSet', sorter: { path: 'Material' } }">-->
+							<!--	<core:Item key="{Material}" text="{Material}"/>-->
+							<!--</m:Input>-->
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="MaterialDescription" label="{i18n>MaterialDes}" visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="MaterialDescription"/>
+							<!--showSuggestion="true" showValueHelp="false"-->
+							<!--	suggestionItems="{ path: '/MaterialF4HelpSet', sorter: { path: 'MaterialDescription' } }">-->
+							<!--	<core:Item key="{MaterialDescription}" text="{MaterialDescription}"/>-->
+							<!--</m:Input>-->
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="MaterialSubstitution" label="{i18n>MaterialSubstitution}" visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="MaterialSubstitution"/>
+							<!--showSuggestion="true" showValueHelp="false"-->
+							<!--	suggestionItems="{ path: '/MaterialF4HelpSet', sorter: { path: 'MaterialSubstitution' } }">-->
+							<!--	<core:Item key="{MaterialSubstitution}" text="{MaterialSubstitution}"/>-->
+							<!--</m:Input>-->
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="MaterialSalesStatus" label="{i18n>MaterialSalesStatus}" visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="MaterialSalesStatus"/>
+							<!--showSuggestion="true" showValueHelp="false"-->
+							<!--	suggestionItems="{ path: '/MaterialF4HelpSet', sorter: { path: 'MaterialSalesStatus' } }">-->
+							<!--	<core:Item key="{MaterialSalesStatus}" text="{MaterialSalesStatus}"/>-->
+							<!--</m:Input>-->
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="TBDFlag" label="{i18n>TBDFlag}" visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="TBDFlag"/>
+							<!--showSuggestion="true" showValueHelp="false"-->
+							<!--	suggestionItems="{ path: '/MaterialF4HelpSet', sorter: { path: 'TBDFlag' } }">-->
+							<!--	<core:Item key="{TBDFlag}" text="{TBDFlag}"/>-->
+							<!--</m:Input>-->
+						</fb:control>
+					</fb:FilterGroupItem>
+					<!--<fb:FilterGroupItem groupName="__$INTERNAL$" name="Category2" label="Category 2" visibleInFilterBar="true">-->
+					<!--	<fb:control>-->
+					<!--		<m:Input name="Category2"/>-->
+					<!--	</fb:control>-->
+					<!--</fb:FilterGroupItem>-->
+					<!--<fb:FilterGroupItem groupName="__$INTERNAL$" name="Category3" label="Category 3" visibleInFilterBar="true">-->
+					<!--	<fb:control>-->
+					<!--		<m:Input name="Category3"/>-->
+					<!--	</fb:control>-->
+					<!--</fb:FilterGroupItem>-->
+					<!--<fb:FilterGroupItem groupName="__$INTERNAL$" name="Category4" label="Category 4" visibleInFilterBar="true">-->
+					<!--	<fb:control>-->
+					<!--		<m:Input name="Category4"/>-->
+					<!--	</fb:control>-->
+					<!--</fb:FilterGroupItem>-->
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>
+<!--<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">-->
+<!--<SelectDialog title="{i18n>Material}" class="sapUiPopupWithPadding" items="{/MaterialF4HelpSet}" search="_handleMaterialValueHelpSearch"-->
+<!--	confirm="_handleMaterialValueHelpConfirm" cancel="_handleValueHelpDialogClose" liveChange="_handleMaterialValueHelpSearch">-->
+<!--	<StandardListItem title="{Matnr}" description="{Maktg}" info="{ProdSellPrice}" highlightText="{MaterialSubstitution}"/>-->
+<!--</SelectDialog>-->
+<!---->
+<!--{=${/MaterialF4HelpSet/$count} > 0 ? 'Vish' : 'Materials'}-->
+<!--</core:FragmentDefinition>-->

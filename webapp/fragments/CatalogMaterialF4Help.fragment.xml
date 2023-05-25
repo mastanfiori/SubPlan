@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog title="{i18n>SelMarketArea}" class="sapUiPopupWithPadding" items="{/CatalogMaterialF4HelpSet}" search="_handleMarketAreaValueHelpSearch"
+		confirm="_handleCatalogMaterialValueHelpConfirm" cancel="_handleValueHelpDialogClose" liveChange="_handleCatalogMatValueHelpSearch">
+		<StandardListItem title="{Material}" description="{MaterialDes}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

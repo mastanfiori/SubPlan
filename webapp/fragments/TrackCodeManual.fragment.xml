@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="{i18n>ManualTrackingCodesHeader}" contentWidth="40%">
+		<content>
+			<Table sticky="ColumnHeaders" alternateRowColors="true" items="{manualTrackCodesData>/}" mode="Delete" delete="onTrackRangeItemDelete">
+				<headerToolbar>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://add" press="onAddItem"></Button>
+						</content>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Label text="{i18n>TrackingCode}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Input name="{i18n>ManualTrackCode}" value="{manualTrackCodesData>TrackingCode}" change="onTrackingCodeChange"
+								valueStateText="{manualTrackCodesData>TCValueText}" valueState="{manualTrackCodesData>TCValueState}"/>
+							<!--visible="true" valueStateText="{manualTrackCodesData>TrackCodeStateText}" valueState="{manualTrackCodesData>TrackCodeState}"-->
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<beginButton>
+			<Button text="{i18n>Ok}" press="onDisplayDialogCancel"/>
+		</beginButton>
+		<endButton>
+			<Button text="{i18n>Cancel}" press="onDisplayDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

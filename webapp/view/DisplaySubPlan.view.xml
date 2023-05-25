@@ -1,0 +1,633 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:uxap="sap.uxap" xmlns:forms="sap.ui.layout.form"
+	xmlns:semantic="sap.m.semantic" xmlns:l="sap.ui.layout" controllerName="com.itell.bradford.ZSD_SUBPLAN_MAINT.controller.DisplaySubPlan"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:blockcolor="sap.uxap.sample.SharedBlocks">
+	<Page navButtonPress="onNavBack" showSubHeader="false" showNavButton="true">
+		<uxap:ObjectPageLayout id="ObjectPageLayoutDisplay">
+			<uxap:headerTitle>
+				<uxap:ObjectPageDynamicHeaderTitle>
+					<uxap:heading>
+						<Title text="{i18n>DisplaySubPlan} {DispSubPlanHeader>/SubPlanID}"/>
+					</uxap:heading>
+					<!--<uxap:ObjectPageHeader objectTitle="{i18n>DisplaySubPlan}"></uxap:ObjectPageHeader>-->
+					<!--<uxap:expandedHeading>-->
+					<!--	<Title text="{i18n>DisplaySubPlan}"/>-->
+					<!--</uxap:expandedHeading>-->
+					<!--<uxap:snappedHeading>-->
+					<!--	<Title text="{i18n>DisplaySubPlan}"/>-->
+					<!--</uxap:snappedHeading>-->
+					<uxap:expandedContent>
+						<FlexBox wrap="Wrap">
+							<!--<l:VerticalLayout class="sapUiSmallMarginBeginEnd">-->
+							<!--	<ObjectAttribute title="{i18n>SubPlanID}" text="{DispSubPlanHeader>/SubPlanID}" class="DisplayStatus"/>-->
+							<!--</l:VerticalLayout>-->
+							<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+								<ObjectStatus class="DisplayStatus" title="{i18n>Status}" text="{ObjecStatusModel>/Text}" state="{ObjecStatusModel>/State}"/>
+								<ObjectAttribute title="{i18n>NumberOfUnits}" text="{DispSubPlanHeader>/NumberOfUnits}" class="DisplayStatus"/>
+							</l:VerticalLayout>
+						</FlexBox>
+					</uxap:expandedContent>
+					<uxap:snappedContent>
+						<FlexBox wrap="Wrap">
+							<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+								<!--<ObjectAttribute title="{i18n>SubPlanID}" text="{DispSubPlanHeader>/SubPlanID}" class="DisplayStatus"/>-->
+								<ObjectAttribute title="{i18n>planversionnum}" text="{DispSubPlanHeader>/PlanVersionNum}" class="DisplayStatus"/>
+								<ObjectAttribute title="{i18n>planversiondesc}" text="{DispSubPlanHeader>/PlanVersionDesc}" class="DisplayStatus"/>
+							</l:VerticalLayout>
+							<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+								<ObjectAttribute title="{i18n>salesorganization}" text="{DispSubPlanHeader>/SalesOrganization}" class="DisplayStatus"/>
+								<ObjectAttribute title="{i18n>NumberOfUnits}" text="{DispSubPlanHeader>/NumberOfUnits}" class="DisplayStatus"/>
+							</l:VerticalLayout>
+							<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+								<ObjectStatus class="DisplayStatus" title="{i18n>Status}" text="{ObjecStatusModel>/Text}" state="{ObjecStatusModel>/State}"/>
+							</l:VerticalLayout>
+						</FlexBox>
+					</uxap:snappedContent>
+					<uxap:actions>
+						<Button text="{i18n>ChangeLog}" type="Emphasized" tooltip="{i18n>ChangeLog}" press="onChangeLogPress"/>
+						<Button text="{i18n>Edit}" type="Emphasized" tooltip="{i18n>Edit}" press="onEdit"/>
+						<Button text="{i18n>NewVersion}" type="Emphasized" tooltip="{i18n>NewVersion}" press="onNewVersion"/>
+						<Button text="{i18n>Delete}" type="Transparent" visible="false" tooltip="{i18n>Delete}" press="onDelete"/>
+					</uxap:actions>
+				</uxap:ObjectPageDynamicHeaderTitle>
+			</uxap:headerTitle>
+			<uxap:headerContent>
+				<!--<ObjectAttribute title="Sub Plan ID" text="040858"/>-->
+				<!--<ObjectAttribute title="Sales Org" text="1710"/>-->
+				<!--<ObjectStatus class="sapUiSmallMarginBottom" text="Product Shipped" state="Success"/>-->
+			</uxap:headerContent>
+			<uxap:sections>
+				<uxap:ObjectPageSection title="{i18n>SubPlanInfo}" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection>
+							<uxap:blocks>
+								<forms:SimpleForm labelSpanL="2" labelSpanM="2" editable="false" labelSpanS="4" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+									maxContainerCols="2" layout="ResponsiveGridLayout" width="100%">
+									<Label text="{i18n>SubPlanID}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/SubPlanID}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>salesorganization}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/SalesOrganization}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>planversiondesc}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PlanVersionDesc}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>SubplanName}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/SubplanName}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>promoid}" visible="{DispSubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PromoID}" class="adjustHeight" visible="{DispSubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>OfferSeqNum}" visible="{DispSubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/OfferSeqNbr}" class="adjustHeight" visible="{DispSubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>PlanID}" visible="{DispSubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PlanID}" class="adjustHeight" visible="{DispSubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>planversionnum}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PlanVersionNum}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Button text="{i18n>AvailbleVersions}" press="onAvailbleVersionsClick">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Button>
+									<Label text="{i18n>Status}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Select class="DisplayStatus" forceSelection="false" selectedKey="{DispSubPlanHeader>/Status}" items="{subPlanStatusItemsDisp>/}"
+										editable="false">
+										<core:Item key="{subPlanStatusItemsDisp>Value}" text="{subPlanStatusItemsDisp>Description}"/>
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Select>
+									<Label text="{i18n>CTN}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Switch state="{DispSubPlanHeader>/CTN}" class="adjustHeight" customTextOn="Yes" customTextOff="No" enabled="false">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Switch>
+									<Label text="{i18n>WEBOEFlag}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Switch state="{DispSubPlanHeader>/WEBOEFlag}" class="adjustHeight" customTextOn="Yes" customTextOff="No" enabled="false">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Switch>
+									<Label text="{i18n>RolloutMaterial}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Link press="onMaterialLinkPress" class="adjustHeight" text="{DispSubPlanHeader>/RolloutMaterial}">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Link>
+									<Text text="{DispSubPlanHeader>/RolloutMaterialDes}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Switch state="{DispSubPlanHeader>/PromoplanFlag}" class="adjustHeight" customTextOn="Yes" customTextOff="No" enabled="false">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Switch>
+									<!--<Label text="{i18n>NumberOfUnits}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<Text text="{DispSubPlanHeader>/NumberOfUnits}" class="adjustHeight">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M2 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Text>-->
+									<!--<Text text="{DispSubPlanHeader>/Status}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Text>-->
+								</forms:SimpleForm>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection title="{i18n>TrackingCodeInfo}" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection>
+							<uxap:blocks>
+								<forms:SimpleForm labelSpanL="2" labelSpanM="2" editable="false" labelSpanS="4" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+									maxContainerCols="2" layout="ResponsiveGridLayout" width="100%">
+									<Label text="{i18n>CatalogMaterial}" visible="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Link press="onMaterialLinkPress" class="adjustHeight" text="{DispSubPlanHeader>/CatalogMaterial}">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Link>
+									<Text text="{DispSubPlanHeader>/CatalogMaterialDes}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>CustSrvTrackingCode}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/ClntSrvcsTrackingCode}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Button text="{i18n>CustSrvTrackCodeDisplay}" press="onCustSrvTrackCodeDisplay">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Button>
+									<Label text="{i18n>MarketArea}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/MarketArea} - {DispSubPlanHeader>/MarketAreaDesc}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>BackendTrackingCode}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/BackendTrackCode}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>TrackingCodeInterval}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/TrackingCodeFrom}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Text text="{i18n>To}: {DispSubPlanHeader>/TrackingCodeTo}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Text>
+									<!--<Label text="{i18n>SubSegmentCode}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L2 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<Text text="{DispSubPlanHeader>/SubSegmentCode}" class="adjustHeight">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M2 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Text>-->
+									<Label text="{i18n>AgedTrackingCode}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Switch state="{DispSubPlanHeader>/Agedtrackingcode}" class="adjustHeight" change="onAgedTrackChange" customTextOn="Yes" customTextOff="No"
+										enabled="false">
+										<!--type="AcceptReject/Default"-->
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Switch>
+									<Label text="">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Button text="{i18n>DisplayTrackCodeManual}" press="onManualTrackingCodesDisplay">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Button>
+									<Label text="{i18n>SlidingScaleType}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/SlidingScaleType}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>CatalogID}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/CatalogID}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>ReportBreak}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/Reportbreak}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+								</forms:SimpleForm>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection title="{i18n>Default}" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection>
+							<uxap:blocks>
+								<forms:SimpleForm labelSpanL="2" labelSpanM="2" editable="false" labelSpanS="4" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+									maxContainerCols="2" layout="ResponsiveGridLayout" width="100%">
+									<Label text="{i18n>PromiseDays}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PromiseDays}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>ShipIntervalCC}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/ShipIntervalDaysCC}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<!--<Label text="{i18n>StaticPromiseDate}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L2 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<Text text="{path:'DispSubPlanHeader>/StaticPromiseDate', type:'sap.ui.model.type.Date'}" class="adjustHeight">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Text>-->
+									<Label text="{i18n>NumberOfDays}" visible="false">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/NumberOfDays}" class="adjustHeight" visible="false">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>NumOfInstalls}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/NumberOfInstalls}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>ShipIntervalNonCC}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/ShipIntervalDayNonCC}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<!--<Label text="{i18n>AmountPaidTrigger}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L2 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<Text text="{DispSubPlanHeader>/AmountPaidTrigger}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M2 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Text>-->
+									<Label text="{i18n>NubrPmtsBefore}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/NubrPmtsBefore}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<!--<Label text="{i18n>AmountPaidTriggerPercent}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L2 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<Text text="{DispSubPlanHeader>/AmountPaidTriggerPercent}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M2 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Text>-->
+									<Label text="{i18n>PurchaseLimit}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PurchaseLimit}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>PanelArea}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PanelArea}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>InvAllocationCode}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/InvAllocationCode}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<!--<Label text="{i18n>NonConsecutive}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L2 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<Text text="{DispSubPlanHeader>/NonConsecutive}" class="adjustHeight">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M2 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Text>-->
+									<Label text="{i18n>SSPrice}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PostageHandling}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>Consecutive}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/ConsecutiveReturnCount}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<!--<Label text="{i18n>MaterialByPass}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L2 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<Text text="{DispSubPlanHeader>/MaterialByPass}" class="adjustHeight">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M2 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Text>-->
+									<Label text="{i18n>MultiSSPrice}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PostageHandling2}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>PercentReturnThres}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/PercentReturnThres}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+											<!--<l:GridData span="XL2 L2 M3 S12"/>-->
+										</layoutData>
+									</Text>
+									<!--Unequal 1st Intallment Info: Added on 18th April 2022 by VKOTHURU-->
+									<Label text="{i18n>UnequalFirstInstallment}" visible="false">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/UnequalFirstInstallment}" class="adjustHeight" visible="false">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<!--Unequal 1st Intallment Info: Added on 18th April 2022 by VKOTHURU-->
+									<!--Category Info: Added on 3rd Jan 2022 by VKOTHURU-->
+									<Label text="{i18n>Category1}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/Category1}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>Category2}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/Category2}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>Category3}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/Category3}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>Category4}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/Category4}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>Category5}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{DispSubPlanHeader>/Category5}" class="adjustHeight">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Text>
+									<!--Category Info: Added on 3rd Jan 2022 by VKOTHURU-->
+								</forms:SimpleForm>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection title="{i18n>Items}" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection>
+							<uxap:blocks>
+								<core:Fragment fragmentName="com.itell.bradford.ZSD_SUBPLAN_MAINT.fragments.DisplaySubPlanItems" type="XML"></core:Fragment>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+			</uxap:sections>
+		</uxap:ObjectPageLayout>
+	</Page>
+</mvc:View>

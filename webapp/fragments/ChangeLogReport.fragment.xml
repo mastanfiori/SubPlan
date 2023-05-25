@@ -1,0 +1,89 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:smartTable="sap.ui.comp.smarttable">
+	<smartTable:SmartTable id="ChangeLogSmartTable" class="sapUiNoContentPadding" entitySet="ChangeDocumentsSet"
+		beforeRebindTable="onRebindTable" tableType="ResponsiveTable" useExportToExcel="true" useTablePersonalisation="true"
+		smartFilterId="CLsmartFilterBar" persistencyKey="com.itell.bradford.ZSD_SUBPLAN_MAINT.view.CLSmartTable" enableAutoBinding="true"
+		showVariantManagement="false" showRowCount="false" requestAtLeastFields="SubPlanID"
+		ignoredFields="TCode,ChangeNr,ObjectId,FName,PanelCode,TrackingCode,KeyLen,ChngInd,TextArt,Sprache,TextCase,OutLen,KeyGuid,TabKey254,ExtKeyLen,KeyGuidStr,UTime">
+		<!-- initiallyVisibleFields="SubPlanID,FText,FOld,FNew,UserName,UDate"-->
+		<Table mode="None" alternateRowColors="true" growingThreshold="20" growing="true" growingScrollToLoad="true">
+			<columns>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "SubPlanID","leadingProperty": "SubPlanID", "columnIndex": "1"}'/>
+					</customData>
+					<Text text="{i18n>SubPlanID}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "Version","leadingProperty": "Version", "columnIndex": "2"}'/>
+					</customData>
+					<Text text="{i18n>Version}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ChngInd","leadingProperty": "ChngInd", "columnIndex": "2"}'/>
+					</customData>
+					<Text text="{i18n>ChngInd}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "FText","leadingProperty": "FText", "columnIndex": "3"}'/>
+					</customData>
+					<Text text="{i18n>FText}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "FOld","leadingProperty": "FOld", "columnIndex": "4"}'/>
+					</customData>
+					<Text text="{i18n>FOld}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "FNew","leadingProperty": "FNew", "columnIndex": "5"}'/>
+					</customData>
+					<Text text="{i18n>FNew}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "UserName","leadingProperty": "UserName", "columnIndex": "6"}'/>
+					</customData>
+					<Text text="{i18n>UserName}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "UDate","leadingProperty": "UDate", "columnIndex": "7"}'/>
+					</customData>
+					<Text text="{i18n>UDate}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "TabKey","leadingProperty": "TabKey", "columnIndex": "8"}'/>
+					</customData>
+					<Text text="{i18n>TabKey}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "TabName","leadingProperty": "TabName", "columnIndex": "9"}'/>
+					</customData>
+					<Text text="{i18n>TabName}"></Text>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem>
+					<cells>
+						<Text text="{SubPlanID}"></Text>
+						<Text
+							text="{= ${ChngInd} === 'I' ? ${i18n>Insert} : ${ChngInd} === 'E' ? ${i18n>DeleteSingle} : ${ChngInd} === 'D' ? ${i18n>Delete} : ${ChngInd} === 'J' ? ${i18n>InsertSingle} : ${ChngInd} === 'U' ? ${i18n>Change} : ''}"></Text>
+						<Text text="{FText}"></Text>
+						<Text text="{FOld}"></Text>
+						<Text text="{FNew}"></Text>
+						<Text text="{UserName}"></Text>
+						<Text text="{path:'UDate', type:'sap.ui.model.type.Date', formatOptions: { strictParsing: true , UTC: true }} "></Text>
+						<Text text="{TabKey}"></Text>
+						<Text text="{TabName}"></Text>
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</smartTable:SmartTable>
+</core:FragmentDefinition>

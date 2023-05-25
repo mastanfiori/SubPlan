@@ -1,0 +1,187 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:smartTable="sap.ui.comp.smarttable">
+	<smartTable:SmartTable id="subPlanHeader" class="sapUiNoContentPadding" entitySet="ZSD_SUBPLAN_HEADER_CON" beforeRebindTable="onRebindTable"
+		tableType="ResponsiveTable" useExportToExcel="true" useTablePersonalisation="true" smartFilterId="smartFilterBar"
+		persistencyKey="com.itell.bradford.ZSD_SUBPLAN_MAINT.view.SmartTable" enableAutoBinding="false" showVariantManagement="false"
+		showRowCount="true" requestAtLeastFields="salesorganization,subplanid,status,planversionnum" ignoredFields="internalid">
+		<!-- initiallyVisibleFields="subplanid,salesorganization,planversionnum,planversiondesc,promoid"-->
+		<smartTable:customToolbar>
+			<OverflowToolbar design="Transparent">
+				<ToolbarSpacer/>
+				<Button text="{i18n>NewSubPlan}" press="onNewSubPlan" type="Transparent"/>
+			</OverflowToolbar>
+		</smartTable:customToolbar>
+		<Table id="idTab" mode="SingleSelectMaster" itemPress="onNavigation" alternateRowColors="true" growingThreshold="20" growing="true"
+			growingScrollToLoad="true">
+			<columns>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "salesorganization", "leadingProperty": "salesorganization", "sortProperty": "salesorganization", "filterProperty": "salesorganization", "columnIndex": "1"}'/>
+					</customData>
+					<Text text="{i18n>salesorganization}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "subplanid","leadingProperty": "subplanid", "sortProperty": "subplanid", "filterProperty": "subplanid", "columnIndex": "2"}'/>
+					</customData>
+					<Text text="{i18n>subplanid}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "planversionnum","leadingProperty": "planversionnum", "sortProperty": "planversionnum", "filterProperty": "planversionnum", "columnIndex": "3"}'/>
+					</customData>
+					<Text text="{i18n>planversionnum}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "planversiondesc","leadingProperty": "planversiondesc", "columnIndex": "4"}'/>
+					</customData>
+					<Text text="{i18n>planversiondesc}"></Text>
+				</Column>
+				<Column>
+					<customData>
+						<core:CustomData key="p13nData"
+							value='\{"columnKey": "promoid","leadingProperty": "promoid", "sortProperty": "promoid", "filterProperty": "promoid", "columnIndex": "5"}'/>
+					</customData>
+					<Text text="{i18n>promoid}"></Text>
+				</Column>
+				<!--<Column width="15rem">-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "MatDescription","leadingProperty": "MatDescription", "columnIndex": "5"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>MaterialDes}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "MatCost","leadingProperty": "MatCost", "columnIndex": "6"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>MatCost}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "ProductPrice","leadingProperty": "ProductPrice", "columnIndex": "7"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>ProductPrice}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "SHPrice","leadingProperty": "SHPrice", "columnIndex": "8"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>SHPrice}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "ExpSHPrice","leadingProperty": "ExpSHPrice", "columnIndex": "9"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>ExpSHPrice}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "PriceCurrency","leadingProperty": "PriceCurrency", "columnIndex": "10"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>Currency}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "Productionorder","leadingProperty": "Productionorder", "columnIndex": "3"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>ProOrder}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "WorkCenter","leadingProperty": "WorkCenter", "columnIndex": "4"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>WorkCenter}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "Material","leadingProperty": "Material", "columnIndex": "5"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>Material}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "Materialname","leadingProperty": "Materialname", "columnIndex": "6"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>MatDesc}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "Totalquantity","leadingProperty": "Totalquantity", "columnIndex": "7"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>Totalquantity}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "Productionunit","leadingProperty": "Productionunit", "columnIndex": "8"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>Productionunit}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "Pcsweight","leadingProperty": "Pcsweight", "columnIndex": "9"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>Pcsweight}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "PcsMinute","leadingProperty": "PcsMinute", "columnIndex": "10"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>PcsMinute}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "Cuts","leadingProperty": "Cuts", "columnIndex": "11"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>Cuts}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "StartTime","leadingProperty": "StartTime", "columnIndex": "12"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>StartTime}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "EndTime","leadingProperty": "EndTime", "columnIndex": "13"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>EndTime}"></Text>-->
+				<!--</Column>-->
+				<!--<Column>-->
+				<!--	<customData>-->
+				<!--		<core:CustomData key="p13nData" value='\{"columnKey": "Status","leadingProperty": "Status", "columnIndex": "14"}'/>-->
+				<!--	</customData>-->
+				<!--	<Text text="{i18n>Status}"></Text>-->
+				<!--</Column>-->
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation">
+					<cells>
+						<Text text="{salesorganization}"></Text>
+						<Text text="{subplanid}"></Text>
+						<Text text="{planversionnum}"></Text>
+						<Text text="{planversiondesc}"></Text>
+						<Text text="{promoid}"></Text>
+						<!--<Text text="{MatDescription}"></Text>-->
+						<!--<Text text="{path: 'MatCost', formatter: '.oFormatter.formatFloat'}"></Text>-->
+						<!--<Text text="{ProductPrice}"></Text>-->
+						<!--<Text text="{SHPrice}"></Text>-->
+						<!--<Text text="{ExpSHPrice}"></Text>-->
+						<!--<Text text="{PriceCurrency}"></Text>-->
+						<!--<Text text="{Cuts}"></Text>-->
+						<!--<Text text="{StartTime}"></Text>-->
+						<!--<Text text="{EndTime}"></Text>-->
+						<!--<Text id="Status" text="{path:'Status', formatter:'.oFormatter.getStatusColor'}" class="{cssData>/StatusClass}"></Text>-->
+						<!--<ObjectStatus class="sapUiSmallMarginBottom" text="{Status}" state="{path:'Status', formatter:'.oFormatter.getStatusColor'}"></ObjectStatus>-->
+						<!--formatter:'.oFormatter.getStatusColor' class="{= ${Status}.toUpperCase() === 'WIP' ? 'statusColorYellow' : 'statusColorGreen' }"-->
+						<!--<ObjectStatus class="sapUiSmallMarginBottom" text="Inverted Indication1" inverted="true" state="Indication01"/>-->
+						<!--	<Text text="{path:'Allergentype'}"></Text>-->
+						<!--	<Text text="{cleanout}"></Text>-->
+					</cells>
+				</ColumnListItem>
+			</items>
+		</Table>
+	</smartTable:SmartTable>
+</core:FragmentDefinition>

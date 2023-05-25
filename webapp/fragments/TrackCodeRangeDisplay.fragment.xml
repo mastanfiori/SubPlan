@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Dialog title="{i18n>TrackingRangeDisplay}" contentWidth="40%">
+		<content>
+			<Table sticky="ColumnHeaders" alternateRowColors="true" items="{TrackRangeDataDisplay>/}" mode="None">
+				<columns>
+					<Column>
+						<Label text="{i18n>TrackingCode}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<!--<Text visible="true" text="{TrackRangeDataDisplay>TrackingCode}"/>-->
+							<Link press="onTrackingCodeLinkPress" text="{TrackRangeDataDisplay>TrackingCode}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</content>
+		<!--<beginButton>-->
+		<!--	<Button text="Save" press="ontrackCodeRangeEditDialogCancel"/>-->
+		<!--</beginButton>-->
+		<endButton>
+			<Button text="{i18n>Close}" press="onDisplayDialogCancel"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

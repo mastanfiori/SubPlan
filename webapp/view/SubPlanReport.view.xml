@@ -1,0 +1,31 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:semantic="sap.f.semantic"
+	xmlns:sv="sap.ui.comp.smartvariants" controllerName="com.itell.bradford.ZSD_SUBPLAN_MAINT.controller.SubPlanReport"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<!--<App id="app">-->
+		<Page navButtonPress="onNavBack" showSubHeader="false" showNavButton="true">
+			<semantic:SemanticPage headerPinnable="true" class="sapUiNoContentPadding">
+				<!-- Title Heading-->
+				<semantic:titleHeading>
+					<!--<Title text="{i18n>title}"/>-->
+					<sv:SmartVariantManagement id="__SVM01" persistencyKey="com.itell.bradford.ZSD_SUBPLAN_MAINT.view.SubPlan_SV" showShare="false"
+						entitySet="ZSD_SUBPLAN_HEADER_CON" showExecuteOnSelection="false"></sv:SmartVariantManagement>
+				</semantic:titleHeading>
+				<!-- Header Content -->
+				<semantic:headerContent>
+					<core:Fragment fragmentName="com.itell.bradford.ZSD_SUBPLAN_MAINT.fragments.FilterBar" type="XML"></core:Fragment>
+				</semantic:headerContent>
+				<!-- Content -->
+				<semantic:content class="sapUiNoContentPadding">
+					<HBox id="fragSubPlanlTab" visible="true">
+						<core:Fragment fragmentName="com.itell.bradford.ZSD_SUBPLAN_MAINT.fragments.SubPlanReport" type="XML"></core:Fragment>
+					</HBox>
+				</semantic:content>
+				<!-- Custom Footer Content-->
+				<!--<semantic:footerCustomActions>-->
+				<!--<Button text="{i18n>}" press="onCheck"/>-->
+				<!--	<Button id="SaveBtn" text="{i18n>Save}" press="onSave" enabled="false"/>-->
+				<!--</semantic:footerCustomActions>-->
+			</semantic:SemanticPage>
+		</Page>
+	<!--</App>-->
+</mvc:View>

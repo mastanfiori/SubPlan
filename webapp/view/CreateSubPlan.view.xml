@@ -1,0 +1,676 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:uxap="sap.uxap" xmlns:forms="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" controllerName="com.itell.bradford.ZSD_SUBPLAN_MAINT.controller.CreateSubPlan"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page navButtonPress="onNavBack" showSubHeader="false" showNavButton="true" enableScrolling="false">
+		<uxap:ObjectPageLayout id="ObjectPageLayout" showFooter="true">
+			<uxap:headerTitle>
+				<uxap:ObjectPageDynamicHeaderTitle>
+					<uxap:heading>
+						<Title id="ObjectPageHeader" text=""/>
+					</uxap:heading>
+					<uxap:expandedContent>
+						<FlexBox wrap="Wrap">
+							<!--<l:VerticalLayout class="sapUiSmallMarginBeginEnd">-->
+							<!--<ObjectAttribute title="{i18n>SubPlanID}" text="{SubPlanHeader>/SubPlanID}" class="DisplayStatus"/>-->
+							<!--</l:VerticalLayout>-->
+							<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+								<ObjectStatus class="DisplayStatus" title="{i18n>Status}" text="{ObjectStatusModelCreate>/Text}" state="{ObjectStatusModelCreate>/State}"/>
+								<ObjectAttribute title="{i18n>NumberOfUnits}" text="{SubPlanHeader>/NumberOfUnits}" class="DisplayStatus"/>
+							</l:VerticalLayout>
+						</FlexBox>
+					</uxap:expandedContent>
+					<uxap:snappedContent>
+						<FlexBox wrap="Wrap">
+							<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+								<ObjectAttribute title="{i18n>SubPlanID}" text="{SubPlanHeader>/SubPlanID}" class="DisplayStatus"/>
+								<ObjectAttribute title="{i18n>planversionnum}" text="{SubPlanHeader>/PlanVersionNum}" class="DisplayStatus"/>
+								<ObjectAttribute title="{i18n>planversiondesc}" text="{SubPlanHeader>/PlanVersionDesc}" class="DisplayStatus"/>
+							</l:VerticalLayout>
+							<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+								<ObjectAttribute title="{i18n>salesorganization}" text="{SubPlanHeader>/SalesOrganization}" class="DisplayStatus"/>
+								<ObjectAttribute title="{i18n>NumberOfUnits}" text="{SubPlanHeader>/NumberOfUnits}" class="DisplayStatus"/>
+							</l:VerticalLayout>
+							<l:VerticalLayout class="sapUiSmallMarginBeginEnd">
+								<ObjectStatus class="DisplayStatus" title="{i18n>Status}" text="{ObjectStatusModelCreate>/Text}" state="{ObjectStatusModelCreate>/State}"/>
+							</l:VerticalLayout>
+						</FlexBox>
+					</uxap:snappedContent>
+					<uxap:actions>
+						<Label text="{i18n>PromoplanFlag}"></Label>
+						<Switch state="{SubPlanHeader>/PromoplanFlag}" change="onHeaderSubPlanSwitchChange" customTextOn="Yes" customTextOff="No"
+							enabled="{SubPlanHeader>/ManualSubPlanFlag}"></Switch>
+					</uxap:actions>
+				</uxap:ObjectPageDynamicHeaderTitle>
+			</uxap:headerTitle>
+			<uxap:headerContent>
+				<!--<ObjectStatus class="sapUiSmallMarginBottom" text="Product Shipped" icon="sap-icon://status-positive" state="Success"/>-->
+				<!--<ObjectAttribute title="" text="This example explains the rules for the rendering of sections"/>-->
+			</uxap:headerContent>
+			<uxap:sections>
+				<uxap:ObjectPageSection title="{i18n>SubPlanInfo}" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection>
+							<uxap:blocks>
+								<forms:SimpleForm labelSpanL="2" labelSpanM="2" editable="false" labelSpanS="4" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+									maxContainerCols="2" layout="ResponsiveGridLayout" width="100%">
+									<Label text="{i18n>SubPlanID}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Text text="{SubPlanHeader>/SubPlanID}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>salesorganization}" required="{SubPlanHeader>/EditFlag}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input id="soInput" name="{i18n>salesorganization}" editable="{SubPlanHeader>/EditFlag}" enableSuggestionsHighlighting="true"
+										value="{SubPlanHeader>/SalesOrganization}" showSuggestion="{SubPlanHeader>/EditFlag}" showValueHelp="{SubPlanHeader>/EditFlag}"
+										valueHelpRequest="handleValueHelpSalesOrg" suggestionRows="{salesOrgCollection>/}" change="handleSalesOrgChange" maxLength="4">
+										<suggestionColumns>
+											<Column demandPopin="true" popinDisplay="Inline" hAlign="Begin"><Label text="{i18n>salesorganization}"/></Column>
+											<Column demandPopin="true" popinDisplay="Inline" hAlign="Center" minScreenWidth="Tablet"><Label text="{i18n>Desc}"/></Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<cells><Label text="{salesOrgCollection>Vkorg}"/><Label text="{salesOrgCollection>Vtext}"/></cells>
+											</ColumnListItem>
+										</suggestionRows>
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>planversiondesc}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/PlanVersionDesc}" liveChange="onInputChange" maxLength="40" editable="true">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>SubplanName}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/SubplanName}" liveChange="onInputChange" maxLength="40">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>promoid}" visible="{SubPlanHeader>/PromoplanFlag}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/PromoID}" liveChange="onInputChange" maxLength="6" visible="{SubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>OfferSeqNum}" visible="{SubPlanHeader>/PromoplanFlag}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/OfferSeqNbr}" name="{i18n>OfferSeqNum}" change="onHeaderDecimalFieldChange"
+										visible="{SubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>PlanID}" visible="{SubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/PlanID}" liveChange="onInputChange" maxLength="6" visible="{SubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>planversionnum}" required="{SubPlanHeader>/EditFlag}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>planversionnum}" value="{SubPlanHeader>/PlanVersionNum}" editable="false" type="Number" liveChange="onPlanVersionChange">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Button text="{i18n>AvailbleVersions}" press="onAvailbleVersionsClick">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Button>
+									<Label text="{i18n>Status}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Select class="CreateStatus" forceSelection="false" selectedKey="{SubPlanHeader>/Status}" items="{subPlanStatusItems>/}" editable="false">
+										<core:Item key="{subPlanStatusItems>Value}" text="{subPlanStatusItems>Description}"/>
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Select>
+									<Label text="{i18n>GetStubInfo}" visible="false">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Button text="{i18n>GetStubInfo}" press="onGetStubInfo" visible="{SubPlanHeader>/PromoplanFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Button>
+									<Label text="{i18n>RolloutMaterial}" visible="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>RolloutMaterial}" value="{SubPlanHeader>/RolloutMaterial}" showSuggestion="false" showValueHelp="true"
+										valueHelpOnly="false" valueHelpRequest="onMaterialF4" suggestionRows="{/MaterialF4HelpSet}" maxSuggestionWidth="400px"
+										change="onRolloutMaterialChange" enabled="{SubPlanHeader>/GetStubFlag}">
+										<suggestionColumns>
+											<Column width="20%" demandPopin="true" popinDisplay="Inline" hAlign="Begin" minScreenWidth="Tablet"><Label text="{i18n>Material}"/></Column>
+											<Column width="25%" demandPopin="true" popinDisplay="Inline" hAlign="Begin" minScreenWidth="Tablet"><Label text="{i18n>MaterialDes}"/></Column>
+											<!--<Column width="15%" demandPopin="true" popinDisplay="Inline" hAlign="Begin" minScreenWidth="Tablet"><Label text="{i18n>ProductPrice}"/></Column>-->
+											<!--<Column width="25%" demandPopin="true" popinDisplay="Inline" hAlign="Begin" minScreenWidth="Tablet"><Label text="{i18n>MaterialSubstitution}"/></Column>-->
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<cells>
+													<Text text="{Material}"/>
+													<Text text="{MaterialDescription}"/>
+													<!--<Text text="{ProdSellPrice}"/>-->
+													<!--<Text text="{MaterialSubstitution}"/>-->
+												</cells>
+											</ColumnListItem>
+										</suggestionRows>
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Text text="{SubPlanHeader>/RolloutMaterialDes}">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>CTN}" visible="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Switch name="{i18n>CTN}" state="{SubPlanHeader>/CTN}" change="onCTNSelectionChange" customTextOn="Yes" customTextOff="No"
+										enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Switch>
+									<Label text="{i18n>WEBOEFlag}" visible="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Switch state="{SubPlanHeader>/WEBOEFlag}" change="onInputChange" customTextOn="Yes" customTextOff="No"
+										enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Switch>
+									<!--<Select name="{i18n>CTN}" forceSelection="false" selectedKey="{SubPlanHeader>/CTN}" items="{/CTNValueHelpSet}" enabled="true"-->
+									<!--	change="onCTNSelectionChange">-->
+									<!--	<core:Item key="{CTN}" text="{CTN}"/>-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Select>-->
+								</forms:SimpleForm>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection title="{i18n>TrackingCodeInfo}" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection>
+							<uxap:blocks>
+								<forms:SimpleForm labelSpanL="2" labelSpanM="2" editable="false" labelSpanS="4" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+									maxContainerCols="2" layout="ResponsiveGridLayout" width="100%">
+									<Label text="{i18n>MarketArea}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input id="marketAreaInp" name="{i18n>MarketArea}" value="{SubPlanHeader>/MarketArea}" maxLength="3"
+										suggestionRows="{marketAreaF4Collection>/}" valueHelpRequest="handleValueHelpMarketArea" showSuggestion="true" showValueHelp="true"
+										enabled="{SubPlanHeader>/GetStubFlag}" change="onMarketAreaChange" valueState="{SubPlanHeader>/MarketAreaErrorState}"
+										valueStateText="{SubPlanHeader>/MarketAreaErrorText}">
+										<suggestionColumns>
+											<Column demandPopin="true" popinDisplay="Inline" hAlign="Begin"><Label text="{i18n>MarketArea}"/></Column>
+											<Column demandPopin="true" popinDisplay="Inline" hAlign="Begin" minScreenWidth="Tablet"><Label text="{i18n>Desc}"/></Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<cells><Label text="{marketAreaF4Collection>Mvgr1}"/>
+													<Label text="{marketAreaF4Collection>Bezei}"/>
+												</cells>
+											</ColumnListItem>
+										</suggestionRows>
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Input value="{SubPlanHeader>/MarketAreaDesc}" editable="false">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>CustSrvTrackingCode}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>CustSrvTrackingCode}" value="{SubPlanHeader>/ClntSrvcsTrackingCode}" maxLength="8" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onTrackingCodeChange" valueState="{SubPlanHeader>/ClntSrvcsTrackingCodeErrorState}"
+										valueStateText="{SubPlanHeader>/ClntSrvcsTrackingCodeErrorText}">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Button text="{i18n>CustSrvTrackCodeDisplay}" press="onCustSrvTrackCodeDisplay" enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Button>
+									<Label text="{i18n>CatalogMaterial}" visible="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>CatalogMaterial}" value="{SubPlanHeader>/CatalogMaterial}" showSuggestion="false" showValueHelp="true"
+										valueHelpOnly="false" valueHelpRequest="onCatalogMaterialF4" suggestionRows="{/CatalogMaterialF4HelpSet}" maxSuggestionWidth="400px"
+										change="onCatalogMaterialChange" enabled="{SubPlanHeader>/GetStubFlag}">
+										<suggestionColumns>
+											<Column width="20%" demandPopin="true" popinDisplay="Inline" hAlign="Begin" minScreenWidth="Tablet"><Label text="{i18n>Material}"/></Column>
+											<Column width="25%" demandPopin="true" popinDisplay="Inline" hAlign="Begin" minScreenWidth="Tablet"><Label text="{i18n>MaterialDes}"/></Column>
+										</suggestionColumns>
+										<suggestionRows>
+											<ColumnListItem>
+												<cells>
+													<Text text="{Material}"/>
+													<Text text="{MaterialDes}"/>
+												</cells>
+											</ColumnListItem>
+										</suggestionRows>
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Text text="{SubPlanHeader>/CatalogMaterialDes}">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Text>
+									<Label text="{i18n>BackendTrackingCode}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>BackendTrackingCode}" value="{SubPlanHeader>/BackendTrackCode}" maxLength="8" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onTrackingCodeChange" valueState="{SubPlanHeader>/BackendTrackCodeErrorState}"
+										valueStateText="{SubPlanHeader>/BackendTrackCodeErrorText}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>TrackingCodeInterval}" wrapping="true" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input id="TrackingCodeFromInp" name="{i18n>TrackingCodeFrom}" placeholder="{i18n>TrackingCodeFrom}"
+										value="{SubPlanHeader>/TrackingCodeFrom}" maxLength="8" enabled="{SubPlanHeader>/GetStubFlag}" liveChange="onTrackingCodeChange"
+										valueState="{SubPlanHeader>/TrackingCodeFromErrorState}" valueStateText="{SubPlanHeader>/TrackingCodeFromErrorText}">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Input id="TrackingCodeToInp" name="{i18n>TrackingCodeTo}" placeholder="{i18n>TrackingCodeTo}" value="{SubPlanHeader>/TrackingCodeTo}"
+										maxLength="8" enabled="{SubPlanHeader>/GetStubFlag}" liveChange="onTrackingCodeChange"
+										valueState="{SubPlanHeader>/TrackingCodeToErrorState}" valueStateText="{SubPlanHeader>/TrackingCodeToErrorText}">
+										<layoutData>
+											<l:GridData span="XL2 L2 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>AgedTrackingCode}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Switch state="{SubPlanHeader>/Agedtrackingcode}" change="onInputChange" customTextOn="Yes" customTextOff="No" enabled="true">
+										<!--type="AcceptReject/Default"-->
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Switch>
+									<Label text="">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<!--<Button id="ManuTrackBtn" text="{i18n>TrackCodeManual}" press="onTrackingCodeManual" enabled="{SubPlanHeader>/GetStubFlag}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="XL2 L2 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Button>-->
+									<Button id="ManuTrackBtn2" text="{i18n>TrackCodeManual}" press="onTrackingCodeManual2" enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Button>
+									<Label text="{i18n>SlidingScaleType}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>SlidingScaleType}" showValueHelp="true" valueHelpOnly="false" valueHelpRequest="onScaleTypeF4"
+										value="{SubPlanHeader>/SlidingScaleType}" maxLength="1" enabled="{SubPlanHeader>/GetStubFlag}" change="onSlidingScaleChange">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>CatalogIDSSID}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>CatalogID}" value="{SubPlanHeader>/CatalogID}" maxLength="6" enabled="{SubPlanHeader>/GetStubFlag}"
+										change="onCatalogChange" valueHelpRequest="onCatalogIDF4" valueHelpOnly="false" showValueHelp="true">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>ReportBreak}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>ReportBreak}" value="{SubPlanHeader>/Reportbreak}" maxLength="6" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onDefaultsTabNumericFieldsChange">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+								</forms:SimpleForm>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection title="{i18n>DefaultValues}" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection>
+							<uxap:blocks>
+								<forms:SimpleForm labelSpanL="2" labelSpanM="2" editable="false" labelSpanS="4" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+									maxContainerCols="2" layout="ResponsiveGridLayout" width="100%">
+									<Label text="{i18n>PromiseDays}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>PromiseDays}" type="Tel" value="{SubPlanHeader>/PromiseDays}" maxLength="3" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onDefaultsTabNumericFieldsChange">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>ShipIntervalCC}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>ShipIntervalCC}" type="Tel" value="{SubPlanHeader>/ShipIntervalDaysCC}" maxLength="3"
+										enabled="{SubPlanHeader>/GetStubFlag}" liveChange="onDefaultsTabNumericFieldsChange">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>NumberOfDays}" visible="false">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>NumberOfDays}" type="Tel" value="{SubPlanHeader>/NumberOfDays}" maxLength="3" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onDefaultsTabNumericFieldsChange" visible="false">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>NumOfInstalls}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>NumOfInstalls}" type="Tel" value="{SubPlanHeader>/NumberOfInstalls}" maxLength="3" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onDefaultsTabNumericFieldsChange">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>ShipIntervalNonCC}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>ShipIntervalNonCC}" type="Tel" value="{SubPlanHeader>/ShipIntervalDayNonCC}" maxLength="3"
+										enabled="{SubPlanHeader>/GetStubFlag}" liveChange="onDefaultsTabNumericFieldsChange">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>NubrPmtsBefore}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>NubrPmtsBefore}" type="Tel" maxLength="2" value="{SubPlanHeader>/NubrPmtsBefore}" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onDefaultsTabNumericFieldsChange">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>PurchaseLimit}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>PurchaseLimit}" type="Tel" value="{SubPlanHeader>/PurchaseLimit}" maxLength="2" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onDefaultsTabNumericFieldsChange">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>PanelArea}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>PanelArea}" value="{SubPlanHeader>/PanelArea}" enabled="{SubPlanHeader>/GetStubFlag}" type="Tel"
+										liveChange="onDefaultsTabNumericFieldsChange" maxLength="2">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>InvAllocationCode}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>InvAllocationCode}" value="{SubPlanHeader>/InvAllocationCode}" enabled="{SubPlanHeader>/GetStubFlag}" liveChange="onDefaultsTabNumericFieldsChange" maxLength="2">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>SSPrice}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/PostageHandling}" name="{i18n>SSPrice}" enabled="{SubPlanHeader>/GetStubFlag}"
+										change="onHeaderDecimalFieldChange" valueState="{SubPlanHeader>/PostageHandlingErrorState}"
+										valueStateText="{SubPlanHeader>/PostageHandlingErrorText}">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>Consecutive}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/ConsecutiveReturnCount}" maxLength="20" enabled="{SubPlanHeader>/GetStubFlag}" liveChange="onInputChange">
+										<layoutData>
+											<l:GridData span="L4 M3 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>MultiSSPrice}" required="true">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/PostageHandling2}" name="{i18n>MultiSSPrice}" enabled="{SubPlanHeader>/GetStubFlag}"
+										change="onHeaderDecimalFieldChange" valueState="{SubPlanHeader>/PostageHandling2ErrorState}"
+										valueStateText="{SubPlanHeader>/PostageHandling2ErrorText}">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<!--<Label text="{i18n>NumberOfUnits}">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L2 M3 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Label>-->
+									<!--<Input value="{SubPlanHeader>/NumberOfUnits}" name="{i18n>NumberOfUnits}" maxLength="2" enabled="{SubPlanHeader>/GetStubFlag}"-->
+									<!--	liveChange="onInputChange">-->
+									<!--	<layoutData>-->
+									<!--		<l:GridData span="L4 M2 S12"/>-->
+									<!--	</layoutData>-->
+									<!--</Input>-->
+									<Label text="{i18n>PercentReturnThres}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/PercentReturnThres}" name="{i18n>PercentReturnThres}" maxLength="2" enabled="{SubPlanHeader>/GetStubFlag}"
+										liveChange="onDefaultsTabNumericFieldsChange">
+										<layoutData>
+											<!--<l:GridData span="XL2 L2 M3 S12"/>-->
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<!--Unequal 1st Intallment Info: Added on 18th April 2022 by VKOTHURU-->
+									<Label text="{i18n>UnequalFirstInstallment}" visible="false">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input name="{i18n>UnequalFirstInstallment}" value="{SubPlanHeader>/UnequalFirstInstallment}" change="onHeaderDecimalFieldChange"
+										enabled="{SubPlanHeader>/GetStubFlag}" visible="false">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<!--Unequal 1st Intallment Info: Added on 18th April 2022 by VKOTHURU-->
+									<!--Category Info: Added on 3rd Jan 2022 by VKOTHURU-->
+									<Label text="{i18n>Category1}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/Category1}" type="Tel" name="{i18n>Category1}" maxLength="3" liveChange="onDefaultsTabNumericFieldsChange"
+										enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>Category2}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/Category2}" type="Tel" name="{i18n>Category2}" maxLength="3" liveChange="onDefaultsTabNumericFieldsChange"
+										enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>Category3}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/Category3}" type="Tel" name="{i18n>Category3}" maxLength="3" liveChange="onDefaultsTabNumericFieldsChange"
+										enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>Category4}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/Category4}" type="Tel" name="{i18n>Category4}" maxLength="3" liveChange="onDefaultsTabNumericFieldsChange"
+										enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<Label text="{i18n>Category5}">
+										<layoutData>
+											<l:GridData span="L2 M3 S12"/>
+										</layoutData>
+									</Label>
+									<Input value="{SubPlanHeader>/Category5}" type="Tel" name="{i18n>Category5}" maxLength="3" liveChange="onDefaultsTabNumericFieldsChange"
+										enabled="{SubPlanHeader>/GetStubFlag}">
+										<layoutData>
+											<l:GridData span="L4 M2 S12"/>
+										</layoutData>
+									</Input>
+									<!--Category Info: Added on 3rd Jan 2022 by VKOTHURU-->
+								</forms:SimpleForm>
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+				<uxap:ObjectPageSection title="{i18n>Items}" titleUppercase="false">
+					<uxap:subSections>
+						<uxap:ObjectPageSubSection>
+							<uxap:blocks>
+								<!--<VBox height="10%">-->
+									<core:Fragment fragmentName="com.itell.bradford.ZSD_SUBPLAN_MAINT.fragments.SubPlanItems" type="XML"></core:Fragment>
+								<!--</VBox>-->
+							</uxap:blocks>
+						</uxap:ObjectPageSubSection>
+					</uxap:subSections>
+				</uxap:ObjectPageSection>
+			</uxap:sections>
+			<uxap:footer>
+				<OverflowToolbar>
+					<Button id="popover" icon="sap-icon://message-popup" text="{=${oMsgModel>/}.length}" visible="{=!!${oMsgModel>/}.length}" type="Emphasized"
+						press="handleMessagePopoverPress"/>
+					<ToolbarSpacer/>
+					<Button type="Emphasized" text="{i18n>Activate}" press="onActivate" visible="true"/>
+					<Button type="Emphasized" text="{i18n>Save}" press="onSave"/>
+				</OverflowToolbar>
+			</uxap:footer>
+		</uxap:ObjectPageLayout>
+	</Page>
+</mvc:View>

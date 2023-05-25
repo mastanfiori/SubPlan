@@ -1,0 +1,18 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f" xmlns:sv="sap.ui.comp.smartvariants"
+	xmlns:unified="sap.ui.unified" controllerName="com.itell.bradford.ZSD_SUBPLAN_MAINT.controller.ChangeLog"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page navButtonPress="onChangeLogNavBack" showNavButton="true" title="{i18n>ChangeLog}">
+		<!--<headerContent>-->
+		<!--</headerContent>-->
+		<content>
+			<VBox>
+				<!--<sv:SmartVariantManagement id="__SVCL" persistencyKey="com.itell.bradford.ZSD_SUBPLAN_MAINT.view.ChangeLog_SV" showShare="false"-->
+				<!--	entitySet="ZSD_SUBPLAN_HEADER_CON" showExecuteOnSelection="false"></sv:SmartVariantManagement>-->
+				<core:Fragment fragmentName="com.itell.bradford.ZSD_SUBPLAN_MAINT.fragments.ChangeLogFilterBar" type="XML"></core:Fragment>
+			</VBox>
+			<HBox>
+				<core:Fragment fragmentName="com.itell.bradford.ZSD_SUBPLAN_MAINT.fragments.ChangeLogReport" type="XML"></core:Fragment>
+			</HBox>
+		</content>
+	</Page>
+</mvc:View>
